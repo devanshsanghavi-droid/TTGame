@@ -1,0 +1,565 @@
+{
+ "audio": {},
+ "fonts": {
+  "serif": "res://assets/fonts/CormorantGaramond.ttf"
+ },
+ "hdris": {
+  "belfast_sunset_puresky": {
+   "path": "res://assets/hdri/belfast_sunset_puresky.hdr",
+   "sun": [
+    -0.7686,
+    0.1093,
+    0.6303
+   ]
+  },
+  "kloofendal_48d_partly_cloudy_puresky": {
+   "path": "res://assets/hdri/kloofendal_48d_partly_cloudy_puresky.hdr",
+   "sun": [
+    -0.4009,
+    0.7419,
+    0.5375
+   ]
+  },
+  "kloofendal_misty_morning_puresky": {
+   "path": "res://assets/hdri/kloofendal_misty_morning_puresky.hdr",
+   "sun": [
+    -0.3281,
+    0.7236,
+    0.6073
+   ]
+  },
+  "kloofendal_overcast_puresky": {
+   "path": "res://assets/hdri/kloofendal_overcast_puresky.hdr",
+   "sun": [
+    -0.4899,
+    0.3819,
+    0.7837
+   ]
+  },
+  "kloppenheim_06_puresky": {
+   "path": "res://assets/hdri/kloppenheim_06_puresky.hdr",
+   "sun": [
+    -0.3169,
+    0.5133,
+    0.7976
+   ]
+  },
+  "overcast_soil_puresky": {
+   "path": "res://assets/hdri/overcast_soil_puresky.hdr",
+   "sun": [
+    0.1831,
+    0.5756,
+    0.797
+   ]
+  },
+  "qwantani_afternoon_puresky": {
+   "path": "res://assets/hdri/qwantani_afternoon_puresky.hdr",
+   "sun": [
+    -0.4435,
+    0.653,
+    0.6139
+   ]
+  },
+  "qwantani_dusk_2_puresky": {
+   "path": "res://assets/hdri/qwantani_dusk_2_puresky.hdr",
+   "sun": [
+    -0.5452,
+    0.2638,
+    0.7957
+   ]
+  },
+  "qwantani_night_puresky": {
+   "path": "res://assets/hdri/qwantani_night_puresky.hdr",
+   "sun": [
+    -0.6851,
+    0.0094,
+    0.7284
+   ]
+  },
+  "qwantani_sunset_puresky": {
+   "path": "res://assets/hdri/qwantani_sunset_puresky.hdr",
+   "sun": [
+    -0.6077,
+    0.0704,
+    0.7911
+   ]
+  },
+  "snow_field_puresky": {
+   "path": "res://assets/hdri/snow_field_puresky.hdr",
+   "sun": [
+    -0.647,
+    0.2903,
+    0.7051
+   ]
+  },
+  "syferfontein_0d_clear_puresky": {
+   "path": "res://assets/hdri/syferfontein_0d_clear_puresky.hdr",
+   "sun": [
+    -0.5755,
+    0.0443,
+    0.8166
+   ]
+  },
+  "wasteland_clouds_puresky": {
+   "path": "res://assets/hdri/wasteland_clouds_puresky.hdr",
+   "sun": [
+    -0.6063,
+    0.1704,
+    0.7768
+   ]
+  }
+ },
+ "models": {
+  "antique_estoc": "res://assets/models/antique_estoc/antique_estoc.gltf",
+  "boulder_01": "res://assets/models/boulder_01/boulder_01.gltf",
+  "brass_diya_lantern": "res://assets/models/brass_diya_lantern/brass_diya_lantern.gltf",
+  "brass_pot_01": "res://assets/models/brass_pot_01/brass_pot_01.gltf",
+  "brass_vase_01": "res://assets/models/brass_vase_01/brass_vase_01.gltf",
+  "ceramic_vase_01": "res://assets/models/ceramic_vase_01/ceramic_vase_01.gltf",
+  "ceramic_vase_03": "res://assets/models/ceramic_vase_03/ceramic_vase_03.gltf",
+  "coast_land_rocks_02": "res://assets/models/coast_land_rocks_02/coast_land_rocks_02.gltf",
+  "coast_rocks_01": "res://assets/models/coast_rocks_01/coast_rocks_01.gltf",
+  "coast_rocks_02": "res://assets/models/coast_rocks_02/coast_rocks_02.gltf",
+  "coast_rocks_03": "res://assets/models/coast_rocks_03/coast_rocks_03.gltf",
+  "coast_rocks_05": "res://assets/models/coast_rocks_05/coast_rocks_05.gltf",
+  "coastal_cliff_01": "res://assets/models/coastal_cliff_01/coastal_cliff_01.gltf",
+  "coastal_cliff_02": "res://assets/models/coastal_cliff_02/coastal_cliff_02.gltf",
+  "dead_tree_trunk": "res://assets/models/dead_tree_trunk/dead_tree_trunk.gltf",
+  "dead_tree_trunk_02": "res://assets/models/dead_tree_trunk_02/dead_tree_trunk_02.gltf",
+  "fern_02": "res://assets/models/fern_02/fern_02.gltf",
+  "grass_medium_01": "res://assets/models/grass_medium_01/grass_medium_01.gltf",
+  "island_tree_01": "res://assets/models/island_tree_01/island_tree_01.gltf",
+  "island_tree_02": "res://assets/models/island_tree_02/island_tree_02.gltf",
+  "kite_shield": "res://assets/models/kite_shield/kite_shield.gltf",
+  "large_castle_door": "res://assets/models/large_castle_door/large_castle_door.gltf",
+  "moss_01": "res://assets/models/moss_01/moss_01.gltf",
+  "namaqualand_boulder_02": "res://assets/models/namaqualand_boulder_02/namaqualand_boulder_02.gltf",
+  "namaqualand_boulder_03": "res://assets/models/namaqualand_boulder_03/namaqualand_boulder_03.gltf",
+  "namaqualand_boulder_05": "res://assets/models/namaqualand_boulder_05/namaqualand_boulder_05.gltf",
+  "namaqualand_cliff_01": "res://assets/models/namaqualand_cliff_01/namaqualand_cliff_01.gltf",
+  "nettle_plant": "res://assets/models/nettle_plant/nettle_plant.gltf",
+  "pine_roots": "res://assets/models/pine_roots/pine_roots.gltf",
+  "rock_07": "res://assets/models/rock_07/rock_07.gltf",
+  "rock_09": "res://assets/models/rock_09/rock_09.gltf",
+  "rock_face_01": "res://assets/models/rock_face_01/rock_face_01.gltf",
+  "rock_moss_set_01": "res://assets/models/rock_moss_set_01/rock_moss_set_01.gltf",
+  "rock_moss_set_02": "res://assets/models/rock_moss_set_02/rock_moss_set_02.gltf",
+  "root_cluster_01": "res://assets/models/root_cluster_01/root_cluster_01.gltf",
+  "sand_rocks_small_01": "res://assets/models/sand_rocks_small_01/sand_rocks_small_01.gltf",
+  "shrub_01": "res://assets/models/shrub_01/shrub_01.gltf",
+  "shrub_03": "res://assets/models/shrub_03/shrub_03.gltf",
+  "shrub_04": "res://assets/models/shrub_04/shrub_04.gltf",
+  "stone_01": "res://assets/models/stone_01/stone_01.gltf",
+  "stone_fire_pit": "res://assets/models/stone_fire_pit/stone_fire_pit.gltf",
+  "treasure_chest": "res://assets/models/treasure_chest/treasure_chest.gltf",
+  "tree_stump_01": "res://assets/models/tree_stump_01/tree_stump_01.gltf",
+  "wicker_basket_01": "res://assets/models/wicker_basket_01/wicker_basket_01.gltf",
+  "wooden_axe": "res://assets/models/wooden_axe/wooden_axe.gltf",
+  "wooden_barrels_01": "res://assets/models/wooden_barrels_01/wooden_barrels_01.gltf",
+  "wooden_bucket_01": "res://assets/models/wooden_bucket_01/wooden_bucket_01.gltf",
+  "wooden_crate_01": "res://assets/models/wooden_crate_01/wooden_crate_01.gltf",
+  "wooden_ladder": "res://assets/models/wooden_ladder/wooden_ladder.gltf"
+ },
+ "textures": {
+  "acg_bronze": {
+   "arm": "res://assets/textures/acg_bronze/acg_bronze_arm.jpg",
+   "diff": "res://assets/textures/acg_bronze/acg_bronze_diff.jpg",
+   "nor": "res://assets/textures/acg_bronze/acg_bronze_nor.jpg"
+  },
+  "acg_charred_wood": {
+   "arm": "res://assets/textures/acg_charred_wood/acg_charred_wood_arm.jpg",
+   "diff": "res://assets/textures/acg_charred_wood/acg_charred_wood_diff.jpg",
+   "nor": "res://assets/textures/acg_charred_wood/acg_charred_wood_nor.jpg"
+  },
+  "acg_fabric": {
+   "arm": "res://assets/textures/acg_fabric/acg_fabric_arm.jpg",
+   "diff": "res://assets/textures/acg_fabric/acg_fabric_diff.jpg",
+   "nor": "res://assets/textures/acg_fabric/acg_fabric_nor.jpg"
+  },
+  "acg_ice": {
+   "arm": "res://assets/textures/acg_ice/acg_ice_arm.jpg",
+   "diff": "res://assets/textures/acg_ice/acg_ice_diff.jpg",
+   "nor": "res://assets/textures/acg_ice/acg_ice_nor.jpg"
+  },
+  "acg_lava": {
+   "arm": "res://assets/textures/acg_lava/acg_lava_arm.jpg",
+   "diff": "res://assets/textures/acg_lava/acg_lava_diff.jpg",
+   "nor": "res://assets/textures/acg_lava/acg_lava_nor.jpg"
+  },
+  "acg_snow": {
+   "arm": "res://assets/textures/acg_snow/acg_snow_arm.jpg",
+   "diff": "res://assets/textures/acg_snow/acg_snow_diff.jpg",
+   "nor": "res://assets/textures/acg_snow/acg_snow_nor.jpg"
+  },
+  "aerial_grass_rock": {
+   "arm": "res://assets/textures/aerial_grass_rock/aerial_grass_rock_arm.jpg",
+   "diff": "res://assets/textures/aerial_grass_rock/aerial_grass_rock_diff.jpg",
+   "nor": "res://assets/textures/aerial_grass_rock/aerial_grass_rock_nor.jpg"
+  },
+  "aerial_rocks_02": {
+   "arm": "res://assets/textures/aerial_rocks_02/aerial_rocks_02_arm.jpg",
+   "diff": "res://assets/textures/aerial_rocks_02/aerial_rocks_02_diff.jpg",
+   "nor": "res://assets/textures/aerial_rocks_02/aerial_rocks_02_nor.jpg"
+  },
+  "aerial_sand": {
+   "arm": "res://assets/textures/aerial_sand/aerial_sand_arm.jpg",
+   "diff": "res://assets/textures/aerial_sand/aerial_sand_diff.jpg",
+   "nor": "res://assets/textures/aerial_sand/aerial_sand_nor.jpg"
+  },
+  "bark_brown_02": {
+   "arm": "res://assets/textures/bark_brown_02/bark_brown_02_arm.jpg",
+   "diff": "res://assets/textures/bark_brown_02/bark_brown_02_diff.jpg",
+   "nor": "res://assets/textures/bark_brown_02/bark_brown_02_nor.jpg"
+  },
+  "bark_willow_02": {
+   "arm": "res://assets/textures/bark_willow_02/bark_willow_02_arm.jpg",
+   "diff": "res://assets/textures/bark_willow_02/bark_willow_02_diff.jpg",
+   "nor": "res://assets/textures/bark_willow_02/bark_willow_02_nor.jpg"
+  },
+  "brick_floor_003": {
+   "arm": "res://assets/textures/brick_floor_003/brick_floor_003_arm.jpg",
+   "diff": "res://assets/textures/brick_floor_003/brick_floor_003_diff.jpg",
+   "nor": "res://assets/textures/brick_floor_003/brick_floor_003_nor.jpg"
+  },
+  "brown_brick_02": {
+   "arm": "res://assets/textures/brown_brick_02/brown_brick_02_arm.jpg",
+   "diff": "res://assets/textures/brown_brick_02/brown_brick_02_diff.jpg",
+   "nor": "res://assets/textures/brown_brick_02/brown_brick_02_nor.jpg"
+  },
+  "brown_leather": {
+   "arm": "res://assets/textures/brown_leather/brown_leather_arm.jpg",
+   "diff": "res://assets/textures/brown_leather/brown_leather_diff.jpg",
+   "nor": "res://assets/textures/brown_leather/brown_leather_nor.jpg"
+  },
+  "brown_mud_02": {
+   "arm": "res://assets/textures/brown_mud_02/brown_mud_02_arm.jpg",
+   "diff": "res://assets/textures/brown_mud_02/brown_mud_02_diff.jpg",
+   "nor": "res://assets/textures/brown_mud_02/brown_mud_02_nor.jpg"
+  },
+  "brown_mud_03": {
+   "arm": "res://assets/textures/brown_mud_03/brown_mud_03_arm.jpg",
+   "diff": "res://assets/textures/brown_mud_03/brown_mud_03_diff.jpg",
+   "nor": "res://assets/textures/brown_mud_03/brown_mud_03_nor.jpg"
+  },
+  "brown_mud_leaves_01": {
+   "arm": "res://assets/textures/brown_mud_leaves_01/brown_mud_leaves_01_arm.jpg",
+   "diff": "res://assets/textures/brown_mud_leaves_01/brown_mud_leaves_01_diff.jpg",
+   "nor": "res://assets/textures/brown_mud_leaves_01/brown_mud_leaves_01_nor.jpg"
+  },
+  "burned_ground_01": {
+   "arm": "res://assets/textures/burned_ground_01/burned_ground_01_arm.jpg",
+   "diff": "res://assets/textures/burned_ground_01/burned_ground_01_diff.jpg",
+   "nor": "res://assets/textures/burned_ground_01/burned_ground_01_nor.jpg"
+  },
+  "castle_brick_07": {
+   "arm": "res://assets/textures/castle_brick_07/castle_brick_07_arm.jpg",
+   "diff": "res://assets/textures/castle_brick_07/castle_brick_07_diff.jpg",
+   "nor": "res://assets/textures/castle_brick_07/castle_brick_07_nor.jpg"
+  },
+  "castle_wall_slates": {
+   "arm": "res://assets/textures/castle_wall_slates/castle_wall_slates_arm.jpg",
+   "diff": "res://assets/textures/castle_wall_slates/castle_wall_slates_diff.jpg",
+   "nor": "res://assets/textures/castle_wall_slates/castle_wall_slates_nor.jpg"
+  },
+  "clay_block_wall": {
+   "arm": "res://assets/textures/clay_block_wall/clay_block_wall_arm.jpg",
+   "diff": "res://assets/textures/clay_block_wall/clay_block_wall_diff.jpg",
+   "nor": "res://assets/textures/clay_block_wall/clay_block_wall_nor.jpg"
+  },
+  "clay_plaster": {
+   "arm": "res://assets/textures/clay_plaster/clay_plaster_arm.jpg",
+   "diff": "res://assets/textures/clay_plaster/clay_plaster_diff.jpg",
+   "nor": "res://assets/textures/clay_plaster/clay_plaster_nor.jpg"
+  },
+  "cliff_side": {
+   "arm": "res://assets/textures/cliff_side/cliff_side_arm.jpg",
+   "diff": "res://assets/textures/cliff_side/cliff_side_diff.jpg",
+   "nor": "res://assets/textures/cliff_side/cliff_side_nor.jpg"
+  },
+  "coast_land_rocks_01": {
+   "arm": "res://assets/textures/coast_land_rocks_01/coast_land_rocks_01_arm.jpg",
+   "diff": "res://assets/textures/coast_land_rocks_01/coast_land_rocks_01_diff.jpg",
+   "nor": "res://assets/textures/coast_land_rocks_01/coast_land_rocks_01_nor.jpg"
+  },
+  "coast_sand_rocks_02": {
+   "arm": "res://assets/textures/coast_sand_rocks_02/coast_sand_rocks_02_arm.jpg",
+   "diff": "res://assets/textures/coast_sand_rocks_02/coast_sand_rocks_02_diff.jpg",
+   "nor": "res://assets/textures/coast_sand_rocks_02/coast_sand_rocks_02_nor.jpg"
+  },
+  "cobblestone_floor_04": {
+   "arm": "res://assets/textures/cobblestone_floor_04/cobblestone_floor_04_arm.jpg",
+   "diff": "res://assets/textures/cobblestone_floor_04/cobblestone_floor_04_diff.jpg",
+   "nor": "res://assets/textures/cobblestone_floor_04/cobblestone_floor_04_nor.jpg"
+  },
+  "damp_beach_sand": {
+   "arm": "res://assets/textures/damp_beach_sand/damp_beach_sand_arm.jpg",
+   "diff": "res://assets/textures/damp_beach_sand/damp_beach_sand_diff.jpg",
+   "nor": "res://assets/textures/damp_beach_sand/damp_beach_sand_nor.jpg"
+  },
+  "dark_rock": {
+   "arm": "res://assets/textures/dark_rock/dark_rock_arm.jpg",
+   "diff": "res://assets/textures/dark_rock/dark_rock_diff.jpg",
+   "nor": "res://assets/textures/dark_rock/dark_rock_nor.jpg"
+  },
+  "denim_fabric": {
+   "arm": "res://assets/textures/denim_fabric/denim_fabric_arm.jpg",
+   "diff": "res://assets/textures/denim_fabric/denim_fabric_diff.jpg",
+   "nor": "res://assets/textures/denim_fabric/denim_fabric_nor.jpg"
+  },
+  "dry_ground_01": {
+   "arm": "res://assets/textures/dry_ground_01/dry_ground_01_arm.jpg",
+   "diff": "res://assets/textures/dry_ground_01/dry_ground_01_diff.jpg",
+   "nor": "res://assets/textures/dry_ground_01/dry_ground_01_nor.jpg"
+  },
+  "dry_riverbed_rock": {
+   "arm": "res://assets/textures/dry_riverbed_rock/dry_riverbed_rock_arm.jpg",
+   "diff": "res://assets/textures/dry_riverbed_rock/dry_riverbed_rock_diff.jpg",
+   "nor": "res://assets/textures/dry_riverbed_rock/dry_riverbed_rock_nor.jpg"
+  },
+  "fabric_leather_02": {
+   "arm": "res://assets/textures/fabric_leather_02/fabric_leather_02_arm.jpg",
+   "diff": "res://assets/textures/fabric_leather_02/fabric_leather_02_diff.jpg",
+   "nor": "res://assets/textures/fabric_leather_02/fabric_leather_02_nor.jpg"
+  },
+  "fabric_pattern_05": {
+   "arm": "res://assets/textures/fabric_pattern_05/fabric_pattern_05_arm.jpg",
+   "diff": "res://assets/textures/fabric_pattern_05/fabric_pattern_05_diff.jpg",
+   "nor": "res://assets/textures/fabric_pattern_05/fabric_pattern_05_nor.jpg"
+  },
+  "forest_floor": {
+   "arm": "res://assets/textures/forest_floor/forest_floor_arm.jpg",
+   "diff": "res://assets/textures/forest_floor/forest_floor_diff.jpg",
+   "nor": "res://assets/textures/forest_floor/forest_floor_nor.jpg"
+  },
+  "forest_ground_04": {
+   "arm": "res://assets/textures/forest_ground_04/forest_ground_04_arm.jpg",
+   "diff": "res://assets/textures/forest_ground_04/forest_ground_04_diff.jpg",
+   "nor": "res://assets/textures/forest_ground_04/forest_ground_04_nor.jpg"
+  },
+  "forrest_ground_01": {
+   "arm": "res://assets/textures/forrest_ground_01/forrest_ground_01_arm.jpg",
+   "diff": "res://assets/textures/forrest_ground_01/forrest_ground_01_diff.jpg",
+   "nor": "res://assets/textures/forrest_ground_01/forrest_ground_01_nor.jpg"
+  },
+  "granite_tile_03": {
+   "arm": "res://assets/textures/granite_tile_03/granite_tile_03_arm.jpg",
+   "diff": "res://assets/textures/granite_tile_03/granite_tile_03_diff.jpg",
+   "nor": "res://assets/textures/granite_tile_03/granite_tile_03_nor.jpg"
+  },
+  "granite_wall": {
+   "arm": "res://assets/textures/granite_wall/granite_wall_arm.jpg",
+   "diff": "res://assets/textures/granite_wall/granite_wall_diff.jpg",
+   "nor": "res://assets/textures/granite_wall/granite_wall_nor.jpg"
+  },
+  "gravelly_sand": {
+   "arm": "res://assets/textures/gravelly_sand/gravelly_sand_arm.jpg",
+   "diff": "res://assets/textures/gravelly_sand/gravelly_sand_diff.jpg",
+   "nor": "res://assets/textures/gravelly_sand/gravelly_sand_nor.jpg"
+  },
+  "large_sandstone_blocks": {
+   "arm": "res://assets/textures/large_sandstone_blocks/large_sandstone_blocks_arm.jpg",
+   "diff": "res://assets/textures/large_sandstone_blocks/large_sandstone_blocks_diff.jpg",
+   "nor": "res://assets/textures/large_sandstone_blocks/large_sandstone_blocks_nor.jpg"
+  },
+  "leaves_forest_ground": {
+   "arm": "res://assets/textures/leaves_forest_ground/leaves_forest_ground_arm.jpg",
+   "diff": "res://assets/textures/leaves_forest_ground/leaves_forest_ground_diff.jpg",
+   "nor": "res://assets/textures/leaves_forest_ground/leaves_forest_ground_nor.jpg"
+  },
+  "lichen_rock": {
+   "arm": "res://assets/textures/lichen_rock/lichen_rock_arm.jpg",
+   "diff": "res://assets/textures/lichen_rock/lichen_rock_diff.jpg",
+   "nor": "res://assets/textures/lichen_rock/lichen_rock_nor.jpg"
+  },
+  "low_tide_rocks": {
+   "arm": "res://assets/textures/low_tide_rocks/low_tide_rocks_arm.jpg",
+   "diff": "res://assets/textures/low_tide_rocks/low_tide_rocks_diff.jpg",
+   "nor": "res://assets/textures/low_tide_rocks/low_tide_rocks_nor.jpg"
+  },
+  "medieval_blocks_05": {
+   "arm": "res://assets/textures/medieval_blocks_05/medieval_blocks_05_arm.jpg",
+   "diff": "res://assets/textures/medieval_blocks_05/medieval_blocks_05_diff.jpg",
+   "nor": "res://assets/textures/medieval_blocks_05/medieval_blocks_05_nor.jpg"
+  },
+  "medieval_red_brick": {
+   "arm": "res://assets/textures/medieval_red_brick/medieval_red_brick_arm.jpg",
+   "diff": "res://assets/textures/medieval_red_brick/medieval_red_brick_diff.jpg",
+   "nor": "res://assets/textures/medieval_red_brick/medieval_red_brick_nor.jpg"
+  },
+  "medieval_wood": {
+   "arm": "res://assets/textures/medieval_wood/medieval_wood_arm.jpg",
+   "diff": "res://assets/textures/medieval_wood/medieval_wood_diff.jpg",
+   "nor": "res://assets/textures/medieval_wood/medieval_wood_nor.jpg"
+  },
+  "metasequoia_bark": {
+   "arm": "res://assets/textures/metasequoia_bark/metasequoia_bark_arm.jpg",
+   "diff": "res://assets/textures/metasequoia_bark/metasequoia_bark_diff.jpg",
+   "nor": "res://assets/textures/metasequoia_bark/metasequoia_bark_nor.jpg"
+  },
+  "moss_wood": {
+   "arm": "res://assets/textures/moss_wood/moss_wood_arm.jpg",
+   "diff": "res://assets/textures/moss_wood/moss_wood_diff.jpg",
+   "nor": "res://assets/textures/moss_wood/moss_wood_nor.jpg"
+  },
+  "mossy_rock": {
+   "arm": "res://assets/textures/mossy_rock/mossy_rock_arm.jpg",
+   "diff": "res://assets/textures/mossy_rock/mossy_rock_diff.jpg",
+   "nor": "res://assets/textures/mossy_rock/mossy_rock_nor.jpg"
+  },
+  "mud_cracked_dry_03": {
+   "arm": "res://assets/textures/mud_cracked_dry_03/mud_cracked_dry_03_arm.jpg",
+   "diff": "res://assets/textures/mud_cracked_dry_03/mud_cracked_dry_03_diff.jpg",
+   "nor": "res://assets/textures/mud_cracked_dry_03/mud_cracked_dry_03_nor.jpg"
+  },
+  "mud_forest": {
+   "arm": "res://assets/textures/mud_forest/mud_forest_arm.jpg",
+   "diff": "res://assets/textures/mud_forest/mud_forest_diff.jpg",
+   "nor": "res://assets/textures/mud_forest/mud_forest_nor.jpg"
+  },
+  "palm_tree_bark": {
+   "arm": "res://assets/textures/palm_tree_bark/palm_tree_bark_arm.jpg",
+   "diff": "res://assets/textures/palm_tree_bark/palm_tree_bark_diff.jpg",
+   "nor": "res://assets/textures/palm_tree_bark/palm_tree_bark_nor.jpg"
+  },
+  "pine_bark": {
+   "arm": "res://assets/textures/pine_bark/pine_bark_arm.jpg",
+   "diff": "res://assets/textures/pine_bark/pine_bark_diff.jpg",
+   "nor": "res://assets/textures/pine_bark/pine_bark_nor.jpg"
+  },
+  "plastered_stone_wall": {
+   "arm": "res://assets/textures/plastered_stone_wall/plastered_stone_wall_arm.jpg",
+   "diff": "res://assets/textures/plastered_stone_wall/plastered_stone_wall_diff.jpg",
+   "nor": "res://assets/textures/plastered_stone_wall/plastered_stone_wall_nor.jpg"
+  },
+  "red_dirt_mud_01": {
+   "arm": "res://assets/textures/red_dirt_mud_01/red_dirt_mud_01_arm.jpg",
+   "diff": "res://assets/textures/red_dirt_mud_01/red_dirt_mud_01_diff.jpg",
+   "nor": "res://assets/textures/red_dirt_mud_01/red_dirt_mud_01_nor.jpg"
+  },
+  "red_sandstone_wall": {
+   "arm": "res://assets/textures/red_sandstone_wall/red_sandstone_wall_arm.jpg",
+   "diff": "res://assets/textures/red_sandstone_wall/red_sandstone_wall_diff.jpg",
+   "nor": "res://assets/textures/red_sandstone_wall/red_sandstone_wall_nor.jpg"
+  },
+  "river_small_rocks": {
+   "arm": "res://assets/textures/river_small_rocks/river_small_rocks_arm.jpg",
+   "diff": "res://assets/textures/river_small_rocks/river_small_rocks_diff.jpg",
+   "nor": "res://assets/textures/river_small_rocks/river_small_rocks_nor.jpg"
+  },
+  "rock_06": {
+   "arm": "res://assets/textures/rock_06/rock_06_arm.jpg",
+   "diff": "res://assets/textures/rock_06/rock_06_diff.jpg",
+   "nor": "res://assets/textures/rock_06/rock_06_nor.jpg"
+  },
+  "rock_boulder_dry": {
+   "arm": "res://assets/textures/rock_boulder_dry/rock_boulder_dry_arm.jpg",
+   "diff": "res://assets/textures/rock_boulder_dry/rock_boulder_dry_diff.jpg",
+   "nor": "res://assets/textures/rock_boulder_dry/rock_boulder_dry_nor.jpg"
+  },
+  "rock_face_03": {
+   "arm": "res://assets/textures/rock_face_03/rock_face_03_arm.jpg",
+   "diff": "res://assets/textures/rock_face_03/rock_face_03_diff.jpg",
+   "nor": "res://assets/textures/rock_face_03/rock_face_03_nor.jpg"
+  },
+  "rock_face_04": {
+   "arm": "res://assets/textures/rock_face_04/rock_face_04_arm.jpg",
+   "diff": "res://assets/textures/rock_face_04/rock_face_04_diff.jpg",
+   "nor": "res://assets/textures/rock_face_04/rock_face_04_nor.jpg"
+  },
+  "rock_pitted_mossy": {
+   "arm": "res://assets/textures/rock_pitted_mossy/rock_pitted_mossy_arm.jpg",
+   "diff": "res://assets/textures/rock_pitted_mossy/rock_pitted_mossy_diff.jpg",
+   "nor": "res://assets/textures/rock_pitted_mossy/rock_pitted_mossy_nor.jpg"
+  },
+  "rocks_ground_05": {
+   "arm": "res://assets/textures/rocks_ground_05/rocks_ground_05_arm.jpg",
+   "diff": "res://assets/textures/rocks_ground_05/rocks_ground_05_diff.jpg",
+   "nor": "res://assets/textures/rocks_ground_05/rocks_ground_05_nor.jpg"
+  },
+  "roof_slates_02": {
+   "arm": "res://assets/textures/roof_slates_02/roof_slates_02_arm.jpg",
+   "diff": "res://assets/textures/roof_slates_02/roof_slates_02_diff.jpg",
+   "nor": "res://assets/textures/roof_slates_02/roof_slates_02_nor.jpg"
+  },
+  "rough_linen": {
+   "arm": "res://assets/textures/rough_linen/rough_linen_arm.jpg",
+   "diff": "res://assets/textures/rough_linen/rough_linen_diff.jpg",
+   "nor": "res://assets/textures/rough_linen/rough_linen_nor.jpg"
+  },
+  "rough_wood": {
+   "arm": "res://assets/textures/rough_wood/rough_wood_arm.jpg",
+   "diff": "res://assets/textures/rough_wood/rough_wood_diff.jpg",
+   "nor": "res://assets/textures/rough_wood/rough_wood_nor.jpg"
+  },
+  "rusty_metal_02": {
+   "arm": "res://assets/textures/rusty_metal_02/rusty_metal_02_arm.jpg",
+   "diff": "res://assets/textures/rusty_metal_02/rusty_metal_02_diff.jpg",
+   "nor": "res://assets/textures/rusty_metal_02/rusty_metal_02_nor.jpg"
+  },
+  "sand_01": {
+   "arm": "res://assets/textures/sand_01/sand_01_arm.jpg",
+   "diff": "res://assets/textures/sand_01/sand_01_diff.jpg",
+   "nor": "res://assets/textures/sand_01/sand_01_nor.jpg"
+  },
+  "sandstone_blocks_08": {
+   "arm": "res://assets/textures/sandstone_blocks_08/sandstone_blocks_08_arm.jpg",
+   "diff": "res://assets/textures/sandstone_blocks_08/sandstone_blocks_08_diff.jpg",
+   "nor": "res://assets/textures/sandstone_blocks_08/sandstone_blocks_08_nor.jpg"
+  },
+  "sandstone_cracks": {
+   "arm": "res://assets/textures/sandstone_cracks/sandstone_cracks_arm.jpg",
+   "diff": "res://assets/textures/sandstone_cracks/sandstone_cracks_diff.jpg",
+   "nor": "res://assets/textures/sandstone_cracks/sandstone_cracks_nor.jpg"
+  },
+  "snow_02": {
+   "arm": "res://assets/textures/snow_02/snow_02_arm.jpg",
+   "diff": "res://assets/textures/snow_02/snow_02_diff.jpg",
+   "nor": "res://assets/textures/snow_02/snow_02_nor.jpg"
+  },
+  "snow_04": {
+   "arm": "res://assets/textures/snow_04/snow_04_arm.jpg",
+   "diff": "res://assets/textures/snow_04/snow_04_diff.jpg",
+   "nor": "res://assets/textures/snow_04/snow_04_nor.jpg"
+  },
+  "snow_field_aerial": {
+   "arm": "res://assets/textures/snow_field_aerial/snow_field_aerial_arm.jpg",
+   "diff": "res://assets/textures/snow_field_aerial/snow_field_aerial_diff.jpg",
+   "nor": "res://assets/textures/snow_field_aerial/snow_field_aerial_nor.jpg"
+  },
+  "stony_dirt_path": {
+   "arm": "res://assets/textures/stony_dirt_path/stony_dirt_path_arm.jpg",
+   "diff": "res://assets/textures/stony_dirt_path/stony_dirt_path_diff.jpg",
+   "nor": "res://assets/textures/stony_dirt_path/stony_dirt_path_nor.jpg"
+  },
+  "thatch_roof_angled": {
+   "arm": "res://assets/textures/thatch_roof_angled/thatch_roof_angled_arm.jpg",
+   "diff": "res://assets/textures/thatch_roof_angled/thatch_roof_angled_diff.jpg",
+   "nor": "res://assets/textures/thatch_roof_angled/thatch_roof_angled_nor.jpg"
+  },
+  "weathered_brown_planks": {
+   "arm": "res://assets/textures/weathered_brown_planks/weathered_brown_planks_arm.jpg",
+   "diff": "res://assets/textures/weathered_brown_planks/weathered_brown_planks_diff.jpg",
+   "nor": "res://assets/textures/weathered_brown_planks/weathered_brown_planks_nor.jpg"
+  },
+  "white_sandstone_blocks_02": {
+   "arm": "res://assets/textures/white_sandstone_blocks_02/white_sandstone_blocks_02_arm.jpg",
+   "diff": "res://assets/textures/white_sandstone_blocks_02/white_sandstone_blocks_02_diff.jpg",
+   "nor": "res://assets/textures/white_sandstone_blocks_02/white_sandstone_blocks_02_nor.jpg"
+  },
+  "wood_planks": {
+   "arm": "res://assets/textures/wood_planks/wood_planks_arm.jpg",
+   "diff": "res://assets/textures/wood_planks/wood_planks_diff.jpg",
+   "nor": "res://assets/textures/wood_planks/wood_planks_nor.jpg"
+  },
+  "wood_planks_grey": {
+   "arm": "res://assets/textures/wood_planks_grey/wood_planks_grey_arm.jpg",
+   "diff": "res://assets/textures/wood_planks_grey/wood_planks_grey_diff.jpg",
+   "nor": "res://assets/textures/wood_planks_grey/wood_planks_grey_nor.jpg"
+  },
+  "wool_boucle": {
+   "arm": "res://assets/textures/wool_boucle/wool_boucle_arm.jpg",
+   "diff": "res://assets/textures/wool_boucle/wool_boucle_diff.jpg",
+   "nor": "res://assets/textures/wool_boucle/wool_boucle_nor.jpg"
+  }
+ }
+}

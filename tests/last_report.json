@@ -1,0 +1,59 @@
+[
+  {
+    "id": "unit",
+    "ok": true,
+    "problems": [],
+    "time": 0.0
+  },
+  {
+    "bot_step": "42/43",
+    "deaths": 1,
+    "events": 6,
+    "events_fired": 6,
+    "fired": {
+      "after_gong": "a",
+      "ledge_hint": "b",
+      "pool_hint": "a",
+      "pred": "a",
+      "timer": "a",
+      "tunnel_hint": "a"
+    },
+    "glitches": {
+      "era_flash": 1,
+      "gravity_flicker": 1,
+      "time_stutter": 1,
+      "translation_failure": 1,
+      "yell": 1
+    },
+    "id": "greybox",
+    "load_ms": 138,
+    "mechanics": {
+      "chained_event": 1,
+      "checkpoint": 2,
+      "choice_wrist": 1,
+      "chrono_rewind": 1,
+      "chrono_scan": 1,
+      "death": 1,
+      "dialogue": 1,
+      "event": 6,
+      "glitch": 5,
+      "glitch:era_flash": 1,
+      "glitch:gravity_flicker": 1,
+      "glitch:time_stutter": 1,
+      "glitch:translation_failure": 1,
+      "glitch:yell": 1,
+      "meter_drain": 2203,
+      "noise_event": 2,
+      "portal_entered": 1,
+      "portal_open": 1,
+      "swim": 273,
+      "throw_hit": 1,
+      "timed_event": 1
+    },
+    "ok": true,
+    "problems": [],
+    "telemetry": "/Users/devansh/Library/Application Support/Godot/app_userdata/Fractured Hours/telemetry/test_greybox.jsonl",
+    "time": 36.7166666666659,
+    "wall": 3.716
+  }
+]

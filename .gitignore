@@ -1,0 +1,13 @@
+.godot/
+*.translation
+.DS_Store
+__pycache__/
+# Fetched CC0 assets are reproducible with tools/fetch_assets.py
+assets/textures/
+assets/hdri/
+assets/models/
+assets/audio/
+assets/fonts/
+# Raw capture frames are large; contact sheets are kept
+captures/*/
+captures/*.wav
