@@ -12,13 +12,11 @@ func _ready() -> void:
 	if args.has("capture"):
 		Game.mode = "capture"
 		Game.bot_enabled = true
-		var c: Node = load("res://scripts/systems/capture_runner.gd").new()
-		add_child(c)
+		_start_runner("res://scripts/systems/capture_runner.gd")
 	elif args.has("perf"):
 		Game.mode = "perf"
 		Game.bot_enabled = true
-		var p: Node = load("res://scripts/systems/perf_runner.gd").new()
-		add_child(p)
+		_start_runner("res://scripts/systems/perf_runner.gd")
 	elif args.has("era"):
 		Game.bot_enabled = args.has("autoplay")
 		Game.goto_era.call_deferred(args.era)
@@ -28,3 +26,13 @@ func _ready() -> void:
 	else:
 		var menu: Node = load("res://scripts/ui/main_menu.gd").new()
 		add_child(menu)
+
+
+## Tool modes must never sit idle with a window open if their script is broken.
+func _start_runner(path: String) -> void:
+	var script := load(path) as GDScript
+	if script == null or not script.can_instantiate():
+		push_error("cannot start %s (script error); quitting" % path)
+		get_tree().quit(1)
+		return
+	add_child(script.new())

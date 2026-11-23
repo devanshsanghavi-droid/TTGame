@@ -27,7 +27,7 @@ elif platform.system() == "Darwin" and not a.foreground:
     exe = os.path.realpath(shutil.which(a.godot) or a.godot)
     if "/Contents/MacOS/" in exe:
         cmd = ["open", "-g", "-n", "-W", "-a", exe.split("/Contents/MacOS/")[0], "--stdout", log, "--stderr", log,
-               "--args"] + args + ["--position", "30000,30000"]
+               "--args"] + args + ["--bg=1"]
 with open(log, "a") as f:
     subprocess.run(cmd, stdout=f, stderr=subprocess.STDOUT, timeout=3600)
 res = json.load(open(os.path.join(ROOT, "captures", "perf.json")))

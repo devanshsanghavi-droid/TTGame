@@ -10,8 +10,9 @@ Runs each era's gameplay snippet + scripted camera flythrough with Godot's
     python3 tools/capture.py cambrian --shot 2  # only one flythrough shot
 
 On Linux the engine is wrapped in xvfb-run (a real renderer is still needed).
-On macOS the engine is launched in the background with its window off-screen
-and unfocusable, so captures do not interrupt whatever you are doing. Pass
+On macOS the engine is launched in the background as an unfocusable 128x72
+thumbnail in the top-right corner (macOS stops rendering windows that are
+hidden, so it cannot be fully off-screen). Frames are still 1920x1080. Pass
 --foreground to watch the capture in a normal window instead.
 The frames kept for review are captures/<era>/sel_*.png.
 """
@@ -39,9 +40,19 @@ def run_era(era, a):
             app = exe.split("/Contents/MacOS/")[0]
             # -g: do not bring to the foreground, -n: new instance, -W: wait for exit
             cmd = ["open", "-g", "-n", "-W", "-a", app, "--stdout", log_path, "--stderr", log_path,
-                   "--args"] + cmd[1:] + ["--position", "30000,30000"]
+                   "--args"] + cmd[1:] + ["--bg=1"]
     log = open(log_path, "a")
-    r = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT, timeout=a.timeout)
+    try:
+        r = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT, timeout=a.timeout)
+    except subprocess.TimeoutExpired:
+        # never leave an engine behind writing frames
+        subprocess.run(["pkill", "-f", "--", "--capture=%s " % era])
+        subprocess.run(["pkill", "-f", "--", "--capture=%s$" % era])
+        log.close()
+        for f in glob.glob(os.path.join(out, "f*.png")):
+            os.remove(f)
+        print("[%s] capture TIMED OUT after %ds and was killed. See %s" % (era, a.timeout, log_path))
+        return False
     log.close()
     errs = [l.rstrip() for l in open(os.path.join(out, "godot.log"), errors="replace")
             if "ERROR" in l or "WARNING" in l]
@@ -51,6 +62,10 @@ def run_era(era, a):
         print("[%s] capture FAILED (exit %s, %d frames). See %s" % (era, r.returncode, len(frames), log.name))
         return False
     meta = json.load(open(meta_path))
+    stalled = meta.get("process_frames", 0) - meta.get("drawn_frames", 0)
+    if stalled > 12:
+        print("[%s] WARNING: %d of %d frames were not rendered (the OS hid the window). Frames may repeat; "
+              "re-run, or use --foreground." % (era, stalled, meta.get("process_frames", 0)))
     picks = []
     for s in meta["shots"]:
         first, last = s["first"], min(s["last"], len(frames) - 1)
@@ -101,7 +116,7 @@ def main():
     ap.add_argument("--snippet", default="12")
     ap.add_argument("--shot", default="")
     ap.add_argument("--godot", default="godot")
-    ap.add_argument("--timeout", type=int, default=900)
+    ap.add_argument("--timeout", type=int, default=600)
     ap.add_argument("--keep-frames", action="store_true")
     ap.add_argument("--foreground", action="store_true", help="macOS: show the capture window normally")
     a = ap.parse_args()

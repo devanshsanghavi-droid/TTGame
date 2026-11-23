@@ -26,7 +26,7 @@
       "yell": 1
     },
     "id": "greybox",
-    "load_ms": 130,
+    "load_ms": 206,
     "mechanics": {
       "chained_event": 1,
       "checkpoint": 2,
@@ -54,6 +54,176 @@
     "problems": [],
     "telemetry": "/Users/devansh/Library/Application Support/Godot/app_userdata/Fractured Hours/telemetry/test_greybox.jsonl",
     "time": 36.7166666666659,
-    "wall": 3.776
+    "wall": 3.849
+  },
+  {
+    "bot_step": "38/39",
+    "deaths": 0,
+    "events": 9,
+    "events_fired": 9,
+    "fired": {
+      "air_briefing": "thin",
+      "charge_briefing": "a",
+      "drowning_causeway": "a",
+      "predator_reveal": "surfaces_right",
+      "rogue_wave": "double",
+      "spire_commentary": "b",
+      "stampede": "from_west",
+      "tide_turns": "brisk",
+      "vents_wake": "pattern_b"
+    },
+    "glitches": {
+      "era_flash": 2
+    },
+    "id": "cambrian",
+    "load_ms": 1536,
+    "mechanics": {
+      "anomalocaris_block": 1,
+      "anomalocaris_notice": 1,
+      "checkpoint": 3,
+      "chrono_recharge": 5,
+      "climb_spire": 626,
+      "event": 9,
+      "flash_dry_seabed": 2,
+      "glitch": 2,
+      "glitch:era_flash": 2,
+      "oxygen_drain": 7223,
+      "oxygen_sprint_drain": 526,
+      "portal_entered": 1,
+      "portal_open": 1,
+      "rogue_wave": 1,
+      "stampede": 1,
+      "swim": 474,
+      "tide_rise": 6483,
+      "tide_surge": 1,
+      "trilobite_flee": 4,
+      "trilobite_gather": 5,
+      "vent_gas": 134
+    },
+    "ok": true,
+    "problems": [],
+    "telemetry": "/Users/devansh/Library/Application Support/Godot/app_userdata/Fractured Hours/telemetry/test_cambrian.jsonl",
+    "time": 146.066666666675,
+    "wall": 17.108
+  },
+  {
+    "bot_step": "26/27",
+    "deaths": 0,
+    "events": 8,
+    "events_fired": 8,
+    "fired": {
+      "beam": "turn",
+      "block": "drop",
+      "lamps": "half",
+      "pond": "rock",
+      "storm": "gust",
+      "treb": "stone",
+      "weather": "ash",
+      "wild": "east"
+    },
+    "glitches": {
+      "time_stutter": 1
+    },
+    "id": "lab_fx",
+    "load_ms": 317,
+    "mechanics": {
+      "checkpoint": 2,
+      "event": 8,
+      "fx_beam": 1,
+      "fx_dust": 1,
+      "fx_fire_lit": 94,
+      "fx_firefield": 840,
+      "fx_lamps": 1,
+      "fx_sandstorm": 1,
+      "fx_shockwave": 1,
+      "fx_splash": 1,
+      "fx_weather": 953,
+      "glitch": 1,
+      "glitch:time_stutter": 1,
+      "noise_event": 1,
+      "portal_entered": 1,
+      "portal_open": 1
+    },
+    "ok": true,
+    "problems": [],
+    "telemetry": "/Users/devansh/Library/Application Support/Godot/app_userdata/Fractured Hours/telemetry/test_lab_fx.jsonl",
+    "time": 27.8999999999997,
+    "wall": 3.066
+  },
+  {
+    "bot_step": "15/16",
+    "deaths": 0,
+    "events": 6,
+    "events_fired": 6,
+    "fired": {
+      "drought": "a",
+      "fire": "a",
+      "gust": "gale",
+      "harvest": "a",
+      "snowfall": "a",
+      "timer": "b"
+    },
+    "glitches": {
+      "time_stutter": 1
+    },
+    "id": "lab_foliage",
+    "load_ms": 822,
+    "mechanics": {
+      "burn_spread": 919,
+      "checkpoint": 3,
+      "drought": 840,
+      "event": 6,
+      "glitch": 1,
+      "glitch:time_stutter": 1,
+      "portal_entered": 1,
+      "portal_open": 1,
+      "snow_load": 900,
+      "wind_gust": 709
+    },
+    "ok": true,
+    "problems": [],
+    "telemetry": "/Users/devansh/Library/Application Support/Godot/app_userdata/Fractured Hours/telemetry/test_lab_foliage.jsonl",
+    "time": 39.4166666666657,
+    "wall": 4.725
+  },
+  {
+    "bot_step": "16/17",
+    "deaths": 0,
+    "events": 7,
+    "events_fired": 7,
+    "fired": {
+      "alarm": "a",
+      "crowd": "a",
+      "exit": "a",
+      "gang": "a",
+      "lineup": "b",
+      "seen": "a",
+      "timer": "a"
+    },
+    "glitches": {
+      "yell": 1
+    },
+    "id": "lab_people",
+    "load_ms": 233,
+    "mechanics": {
+      "crowd_cover": 215,
+      "event": 7,
+      "glitch": 1,
+      "glitch:yell": 1,
+      "noise_event": 1,
+      "npc_alerted": 1,
+      "npc_caught": 1,
+      "npc_heard": 1,
+      "npc_lost": 1,
+      "npc_noticed": 1,
+      "portal_entered": 1,
+      "portal_open": 1,
+      "timed_event": 1
+    },
+    "ok": true,
+    "problems": [],
+    "telemetry": "/Users/devansh/Library/Application Support/Godot/app_userdata/Fractured Hours/telemetry/test_lab_people.jsonl",
+    "time": 37.1999999999992,
+    "wall": 3.919
   }
 ]
