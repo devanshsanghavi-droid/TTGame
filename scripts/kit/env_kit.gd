@@ -141,6 +141,7 @@ static func build(era: Node, overrides: Dictionary = {}) -> void:
 	env.glow_hdr_threshold = 1.2
 	env.glow_blend_mode = Environment.GLOW_BLEND_MODE_SOFTLIGHT
 
+	env.set_meta("want", {"vol": c.vol_density > 0.0, "ssr": c.ssr, "sdfgi": c.sdfgi, "glow": c.glow > 0.0})
 	var we := WorldEnvironment.new()
 	we.environment = env
 	we.name = "WorldEnvironment"
@@ -173,6 +174,20 @@ static func build(era: Node, overrides: Dictionary = {}) -> void:
 	era.env = env
 	era.world_env = we
 	era.sun = sun
+
+
+## Re-applies the current graphics quality preset to an environment built by build().
+static func apply_quality(env: Environment) -> void:
+	if env == null:
+		return
+	var q: Dictionary = Game.quality()
+	var want: Dictionary = env.get_meta("want", {"vol": true, "ssr": true, "sdfgi": true, "glow": true})
+	env.volumetric_fog_enabled = q.vol_fog and want.vol
+	env.ssao_enabled = q.ssao
+	env.ssil_enabled = q.ssil
+	env.ssr_enabled = q.ssr and want.ssr
+	env.sdfgi_enabled = q.sdfgi and want.sdfgi
+	env.glow_enabled = q.glow and want.glow
 
 
 ## Points the sun (and its shadows) along a new direction; `dir` points TOWARD the sun.

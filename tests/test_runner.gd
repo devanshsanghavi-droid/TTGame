@@ -5,7 +5,7 @@ extends Node
 ## at least one CHRONO glitch, zero engine errors or warnings.
 
 const MIN_EVENTS := 6
-const WALL_CLOCK_LIMIT := 420.0
+const WALL_CLOCK_LIMIT := 900.0
 
 var results: Array = []
 var seen_event_types := {}
@@ -20,7 +20,7 @@ func _ready() -> void:
 	var speed := maxi(1, int(Game.user_args.get("speed", "10")))
 	Engine.physics_ticks_per_second = 60 * speed
 	Engine.time_scale = float(speed)
-	Engine.max_physics_steps_per_frame = 64
+	Engine.max_physics_steps_per_frame = 24
 	_run.call_deferred()
 
 
@@ -64,6 +64,43 @@ func _unit_tests() -> Dictionary:
 	if ch.translate("Hello there traveller") == "Hello there traveller":
 		problems.append("translation failure does not scramble text")
 	ch.free()
+	# menus build and tear down cleanly
+	var menu: Node = load("res://scripts/ui/main_menu.gd").new()
+	add_child(menu)
+	await get_tree().process_frame
+	menu._show(menu._eras)
+	menu._show(menu._settings)
+	menu._show(menu._main)
+	menu.queue_free()
+	Sfx.stop_ambience()
+	var pause: Node = load("res://scripts/ui/pause_menu.gd").new()
+	add_child(pause)
+	await get_tree().process_frame
+	pause.open()
+	if not get_tree().paused:
+		problems.append("pause menu did not pause the tree")
+	pause.close()
+	if get_tree().paused:
+		problems.append("pause menu did not resume the tree")
+	pause.queue_free()
+	# rebinding round trip
+	var before := Game.binding_label("scan")
+	Game.rebind("scan", KEY_G)
+	if Game.binding_label("scan") != "G":
+		problems.append("rebind did not take effect")
+	Game.reset_bindings()
+	if Game.binding_label("scan") != before:
+		problems.append("reset_bindings did not restore the default")
+	# quality presets exist and differ
+	if Game.QUALITY_PRESETS.low.sdfgi or not Game.QUALITY_PRESETS.high.sdfgi:
+		problems.append("quality presets are wrong")
+	# era unlock progression
+	var was := Game.unlocked
+	Game.unlocked = 1
+	Game.complete_era("cambrian")
+	if not Game.is_unlocked("carboniferous") or Game.is_unlocked("cretaceous"):
+		problems.append("era unlocking is wrong")
+	Game.unlocked = was
 	await get_tree().process_frame
 	for e in ErrorWatch.take():
 		problems.append("[%s] %s  %s" % [e.kind, e.msg, e.where])

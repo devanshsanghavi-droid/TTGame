@@ -28,8 +28,10 @@ class_name Humanoid extends Node3D
 ##   head (more): "bun"|"headband"|"wig"|"shaved"|"headcloth"|"tonsure"|"great_helm"|
 ##                "kettle_helm"|"mail_coif"|"veil"|"circlet"|"braid"|"straw_hat"
 ##   flowers: Color (on a bun)   head_color: Color (cloth / metal of the headwear)
-##   prop / props (more): "sword" (scabbard at the hip)|"hammer"|"oar"|"scroll"|"sack"|"pot"|"drum"|"hoe"
+##   prop / props (more): "sword" (scabbard at the hip)|"hammer"|"oar"|"scroll"|"sack"|"pot"|"head_basket"|"drum"|"hoe"
 ##   shield: "round"|"kite"|"hide"   shield_color: Color
+##   shape: bool            rounder anatomy (shoulders, forearms, calves, fingers) and relaxed arms
+##   cowl_ragged: bool      uneven lower edge on the cowl (fur)
 ##   merge: bool            merge same-material meshes per bone (fewer draw calls)
 ## animate() modes (more): "talk", "drum", "sit_ground"
 
@@ -56,6 +58,8 @@ var _hips_y := 0.95
 var _blend := {"crouch": 0.0, "climb": 0.0, "swim": 0.0, "carry": 0.0, "work": 0.0, "sit": 0.0,
 	"talk": 0.0, "drum": 0.0, "sit_ground": 0.0}
 var _t := 0.0
+var _relax := 0.0
+var _relax_phase := randf() * TAU
 
 
 static func create(config: Dictionary = {}) -> Humanoid:
@@ -105,6 +109,10 @@ func _build() -> void:
 	var sh := 0.9 if female else 1.0          # shoulder width
 	var hipf := 1.07 if female else 1.0       # hip width
 	var limb := 0.88 if female else 1.0       # arm thickness
+	var shape: bool = cfg.get("shape", false)
+	if shape:
+		limb *= 1.12
+		_relax = 0.085
 	scale = Vector3.ONE * (float(cfg.get("height", 1.78)) / 1.78)
 
 	hips = Node3D.new()
@@ -168,6 +176,19 @@ func _build() -> void:
 	var shoe := MatLib.pbr("brown_leather", {"tint": cfg.get("shoe", Color(0.3, 0.22, 0.16)), "scale": 3.0, "world": false})
 	for k in [knee_l, knee_r]:
 		MeshKit.ellipsoid(Vector3(0.05, 0.04, 0.11), shoe if not cfg.get("barefoot", false) else skin, Vector3(0, -0.43, -0.04), k, 1)
+	if shape:
+		# rounder anatomy: shoulders, forearms, hands with fingers, calves, longer feet
+		var dl := Vector3(0.07, 0.078, 0.072) * bulk * limb
+		MeshKit.ellipsoid(dl, upper_l, Vector3(0.014, -0.018, 0), arm_l, 1)
+		MeshKit.ellipsoid(dl, upper_mat, Vector3(-0.014, -0.018, 0), arm_r, 1)
+		for e: Node3D in [elbow_l, elbow_r]:
+			MeshKit.ellipsoid(Vector3(0.046, 0.1, 0.048) * bulk * limb, fore_mat, Vector3(0, -0.085, 0), e, 1)
+		for hn: Node3D in [hand_l, hand_r]:
+			MeshKit.ellipsoid(Vector3(0.034, 0.052, 0.021), skin, Vector3(0, -0.056, -0.008), hn, 1)
+		for k: Node3D in [knee_l, knee_r]:
+			MeshKit.ellipsoid(Vector3(0.058, 0.125, 0.062) * bulk, leg_mat, Vector3(0, -0.15, 0.02), k, 1)
+			MeshKit.ellipsoid(Vector3(0.047, 0.03, 0.075), shoe if not cfg.get("barefoot", false) else skin, Vector3(0, -0.442, -0.1), k, 1)
+		MeshKit.ellipsoid(Vector3(0.115, 0.045, 0.07) * bulk, torso_mat, Vector3(0, 0.035, 0.012), chest, 1)
 	# skirt / kilt / tunic hem
 	var flare: float = cfg.get("skirt_flare", 1.0)
 	if skirt > 0.0:
@@ -351,6 +372,10 @@ func animate(delta: float, speed: float, mode := "walk", climb_speed := 0.0) -> 
 	arm_r.rotation.z = 0.1 + 0.15 * ca
 	elbow_l.rotation.x = 0.25 + 0.35 * stride + 0.5 * cr + 0.6 * cl
 	elbow_r.rotation.x = 0.25 + 0.35 * stride + 0.5 * cr + 0.6 * cl + 0.9 * ca + 0.5 * wk
+	if _relax > 0.0:
+		arm_l.rotation.z += _relax
+		arm_r.rotation.z -= _relax
+		hips.rotation.z = sin(_t * 0.37 + _relax_phase) * 0.018 * (1.0 - clampf(stride * 3.0, 0.0, 1.0))
 	# ---- extra modes, layered on the base pose
 	var tk: float = _blend.talk
 	var dr: float = _blend.drum
@@ -366,12 +391,12 @@ func animate(delta: float, speed: float, mode := "walk", climb_speed := 0.0) -> 
 		chest.rotation.x += sin(_t * 1.1) * 0.03 * tk
 	if dr > 0.001:
 		var b := _t * 10.0
-		arm_l.rotation.x += 0.42 * dr
-		arm_r.rotation.x += 0.42 * dr
-		arm_l.rotation.z -= 0.22 * dr
-		arm_r.rotation.z += 0.22 * dr
-		elbow_l.rotation.x += (0.75 + maxf(sin(b), 0.0) * 0.55) * dr
-		elbow_r.rotation.x += (0.75 + maxf(sin(b + PI), 0.0) * 0.55) * dr
+		arm_l.rotation.x += 0.18 * dr
+		arm_r.rotation.x += 0.18 * dr
+		arm_l.rotation.z -= 0.16 * dr
+		arm_r.rotation.z += 0.16 * dr
+		elbow_l.rotation.x += (0.85 + maxf(sin(b), 0.0) * 0.45) * dr
+		elbow_r.rotation.x += (0.85 + maxf(sin(b + PI), 0.0) * 0.45) * dr
 		chest.rotation.x += (0.06 + sin(b * 0.5) * 0.03) * dr
 		head.rotation.x += sin(b * 0.5) * 0.05 * dr
 	if sg > 0.001:
@@ -489,7 +514,7 @@ func _shell(y_bot: Callable, y_top: Callable, mat: Material, offset := 0.013, fl
 			var cx := -cos(a)
 			var sz := sin(a)
 			var y := lerpf(y_bot.call(cx, sz), y_top.call(cx, sz), v)
-			var r := torso_radius(y) + Vector2(offset, offset) + flare * (1.0 - v) * (1.0 - v * 0.3)
+			var r := torso_radius(y) + Vector2(offset, offset) + flare * (1.0 - v * v * v)
 			var p := Vector3(cx * r.x, y, sz * r.y)
 			verts.append(p)
 			if i == 0:
@@ -524,23 +549,24 @@ func _build_dress() -> void:
 				pts.append(Vector3(lx, y, torso_radius(y).y * sqrt(maxf(1.0 - pow(lx / torso_radius(y).x, 2.0), 0.0)) + 0.02))
 			MeshKit.loft(pts, [Vector2(0.05, 0.011)], dm, hips, 8, Vector3.BACK)
 		else:
-			_shell(func(_cx: float, _sz: float) -> float: return -0.01,
+			_shell(func(_cx: float, _sz: float) -> float: return 0.03,
 				func(cx: float, _sz: float) -> float: return lerpf(0.505, 0.27, smoothstep(-0.52, 0.5, cx)), dm)
 			if style == "sari":
 				MeshKit.loft([Vector3(lx, 0.515, -0.01), Vector3(lx, 0.5, 0.07), Vector3(lx - 0.01, 0.36, 0.137), Vector3(lx - 0.01, 0.05, 0.16), Vector3(lx, -0.3, 0.18)],
 					[Vector2(0.06, 0.012), Vector2(0.075, 0.012), Vector2(0.085, 0.011), Vector2(0.09, 0.01), Vector2(0.095, 0.008)], dm, hips, 8, Vector3.BACK)
 	if cfg.has("cowl"):
 		var cw := _cloth2(cfg.cowl, Color(0.3, 0.26, 0.22))
-		_shell(func(_cx: float, sz: float) -> float: return 0.31 - 0.03 * maxf(sz, 0.0),
-			func(_cx: float, _sz: float) -> float: return 0.537, cw, 0.02, Vector2(0.105, 0.05) * bulk, 0.012)
+		var ragged: float = 0.016 if cfg.get("cowl_ragged", false) else 0.0
+		_shell(func(cx: float, sz: float) -> float: return 0.27 - 0.03 * maxf(sz, 0.0) + sin(atan2(sz, cx) * 7.0) * ragged,
+			func(_cx: float, _sz: float) -> float: return 0.537, cw, 0.02, Vector2(0.135, 0.06) * bulk, 0.012)
 	if cfg.has("collar"):
 		var cm := _dyed(cfg.collar, "acg_fabric", 9.0, true)
 		_shell(func(_cx: float, sz: float) -> float: return 0.452 - 0.03 * maxf(-sz, 0.0),
 			func(_cx: float, _sz: float) -> float: return 0.527, cm, 0.008, Vector2.ZERO, 0.006)
 	if cfg.has("necklace"):
 		var nm := _dyed(cfg.necklace, "acg_fabric", 12.0)
-		_surface_ring(func(_cx: float, sz: float) -> float: return 0.522 - 0.085 * pow(maxf(-sz, 0.0), 1.3) - 0.02 * maxf(sz, 0.0),
-			0.006, [0.0105, 0.006], nm, Vector3.UP, 36, 5)
+		_surface_ring(func(_cx: float, sz: float) -> float: return 0.522 - 0.07 * pow(maxf(-sz, 0.0), 1.3) - 0.02 * maxf(sz, 0.0),
+			0.024 if cfg.has("drape") and String(cfg.get("drape_style", "")) != "stole" else 0.007, [0.0105, 0.006], nm, Vector3.UP, 36, 5)
 	if cfg.has("band"):
 		var bm := _cloth(cfg.band, Color(0.3, 0.2, 0.12))
 		_surface_ring(func(cx: float, _sz: float) -> float: return 0.3 - 0.2 * cx, 0.016, [Vector2(0.007, 0.028)], bm, Vector3(0.78, 0.62, 0.0), 28, 6)
@@ -648,10 +674,14 @@ func _one_prop_more(prop: String, wood: Material) -> void:
 			MeshKit.cyl(0.02, 0.02, 0.26, _dyed(Color(0.82, 0.74, 0.55), "acg_fabric", 8.0), Vector3(0, -0.01, -0.035), hand_r, 8).rotation.x = PI / 2
 		"sack":
 			MeshKit.ellipsoid(Vector3(0.16, 0.2, 0.125), _dyed(Color(0.5, 0.42, 0.3), "acg_fabric", 2.5), Vector3(0.02, -0.1, 0.2), chest)
+		"head_basket":
+			var wk := _dyed(Color(0.62, 0.5, 0.3), "thatch_roof_angled", 6.0)
+			MeshKit.loft([Vector3(0, 0.1, 0), Vector3(0, 0.13, 0), Vector3(0, 0.27, 0), Vector3(0, 0.285, 0)],
+				[Vector2(0.09, 0.09), Vector2(0.13, 0.13), Vector2(0.2, 0.2), Vector2(0.19, 0.19)], wk, head, 12, Vector3.BACK)
 		"pot":
 			var clay := _dyed(Color(0.62, 0.36, 0.25), "clay_plaster", 2.0)
-			MeshKit.ellipsoid(Vector3(0.135, 0.115, 0.135), clay, Vector3(0, 0.225, 0.0), head)
-			MeshKit.cyl(0.07, 0.05, 0.06, clay, Vector3(0, 0.345, 0.0), head, 10)
+			MeshKit.ellipsoid(Vector3(0.135, 0.115, 0.135), clay, Vector3(0, 0.215, 0.0), head)
+			MeshKit.cyl(0.07, 0.05, 0.06, clay, Vector3(0, 0.335, 0.0), head, 10)
 		"drum":
 			var dn := Node3D.new()
 			dn.name = "Drum"

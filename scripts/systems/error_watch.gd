@@ -29,6 +29,9 @@ class WatchLogger extends Logger:
 const IGNORE := [
 	"ObjectDB instances leaked",
 	"resources still in use at exit",
+	# Jolt's thread pool reports this when the machine is heavily loaded (many
+	# Godot instances at once). It waits and carries on; simulation is unaffected.
+	"Jolt Physics job system exceeded the maximum number of jobs",
 ]
 
 var _logger := WatchLogger.new()

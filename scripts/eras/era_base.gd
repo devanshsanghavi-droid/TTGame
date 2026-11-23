@@ -51,6 +51,7 @@ var era_flash_active := false
 var deaths := 0
 var bot: Node = null
 
+var pause_menu: Node
 var _respawn_timer := -1.0
 var _env_saved := {}
 var _finish_timer := -1.0
@@ -171,6 +172,22 @@ func _spawn_player() -> void:
 	chrono = ChronoDevice.new()
 	add_child(chrono)
 	chrono.setup(self, player, hud, rng.randi())
+	pause_menu = load("res://scripts/ui/pause_menu.gd").new()
+	pause_menu.era = self
+	add_child(pause_menu)
+	Game.settings_changed.connect(_on_settings_changed)
+
+
+func _on_settings_changed() -> void:
+	EnvKit.apply_quality(env)
+
+
+## Respawn at the last checkpoint (pause menu).
+func restart_from_checkpoint() -> void:
+	if player.alive and _respawn_timer < 0.0:
+		player.revive(checkpoint_pos)
+		chrono.end_all_glitches()
+		_on_respawn()
 
 
 func _on_player_died(cause: String) -> void:

@@ -107,6 +107,29 @@ func play(sound: String, pos: Variant = null, volume_db := 0.0, pitch := 1.0) ->
 				return
 
 
+## Register an era-specific one-shot under a name, then Sfx.play(name, pos).
+func register(sound: String, stream: AudioStream) -> void:
+	_streams[sound] = stream
+
+
+## Build a mono one-shot from a function: fn(t_seconds, u_0_to_1, white_noise) -> sample in -1..1.
+func make_wav(duration: float, fn: Callable, rate := 22050) -> AudioStreamWAV:
+	var n := int(rate * duration)
+	var data := PackedByteArray()
+	data.resize(n * 2)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 7
+	for i in n:
+		var v := clampf(float(fn.call(float(i) / rate, float(i) / n, rng.randf() * 2.0 - 1.0)), -1.0, 1.0)
+		data.encode_s16(i * 2, int(v * 32000.0))
+	var wav := AudioStreamWAV.new()
+	wav.format = AudioStreamWAV.FORMAT_16_BITS
+	wav.mix_rate = rate
+	wav.stereo = false
+	wav.data = data
+	return wav
+
+
 func _process(delta: float) -> void:
 	if not enabled or _amb_playback == null:
 		return

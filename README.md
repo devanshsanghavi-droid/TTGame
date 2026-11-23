@@ -64,6 +64,8 @@ python3 tools/capture.py cambrian      # or: all
 Runs a 12 second gameplay snippet plus the era's scripted camera shots through
 `--write-movie` (PNG frames, real renderer; wrapped in `xvfb-run` on Linux) and writes
 `captures/contact_sheet_<era>.png`. Review frames are kept as `captures/<era>/sel_*.png`.
+On macOS the capture runs in the background with its window off-screen and unfocusable;
+add `--foreground` to watch it.
 
 ## Performance
 
