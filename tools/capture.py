@@ -10,6 +10,9 @@ Runs each era's gameplay snippet + scripted camera flythrough with Godot's
     python3 tools/capture.py cambrian --shot 2  # only one flythrough shot
 
 On Linux the engine is wrapped in xvfb-run (a real renderer is still needed).
+On macOS the engine is launched in the background with its window off-screen
+and unfocusable, so captures do not interrupt whatever you are doing. Pass
+--foreground to watch the capture in a normal window instead.
 The frames kept for review are captures/<era>/sel_*.png.
 """
 import argparse, glob, json, os, platform, shutil, subprocess, sys
@@ -27,9 +30,17 @@ def run_era(era, a):
            "--snippet=%s" % a.snippet]
     if a.shot:
         cmd.append("--shot=" + a.shot)
+    log_path = os.path.join(out, "godot.log")
     if platform.system() == "Linux" and shutil.which("xvfb-run"):
         cmd = ["xvfb-run", "-a", "-s", "-screen 0 1920x1080x24"] + cmd
-    log = open(os.path.join(out, "godot.log"), "w")
+    elif platform.system() == "Darwin" and not a.foreground:
+        exe = os.path.realpath(shutil.which(a.godot) or a.godot)
+        if "/Contents/MacOS/" in exe:
+            app = exe.split("/Contents/MacOS/")[0]
+            # -g: do not bring to the foreground, -n: new instance, -W: wait for exit
+            cmd = ["open", "-g", "-n", "-W", "-a", app, "--stdout", log_path, "--stderr", log_path,
+                   "--args"] + cmd[1:] + ["--position", "30000,30000"]
+    log = open(log_path, "a")
     r = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT, timeout=a.timeout)
     log.close()
     errs = [l.rstrip() for l in open(os.path.join(out, "godot.log"), errors="replace")
@@ -92,6 +103,7 @@ def main():
     ap.add_argument("--godot", default="godot")
     ap.add_argument("--timeout", type=int, default=900)
     ap.add_argument("--keep-frames", action="store_true")
+    ap.add_argument("--foreground", action="store_true", help="macOS: show the capture window normally")
     a = ap.parse_args()
     eras = a.eras
     if eras == ["all"]:

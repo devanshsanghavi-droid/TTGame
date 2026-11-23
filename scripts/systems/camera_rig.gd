@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 	elif target.input.bot:
 		# bots: drift behind the direction of travel so captures read well
 		var f := target.facing
-		yaw = lerp_angle(yaw, atan2(-f.x, -f.z) + PI, 1.0 - exp(-delta * 1.5))
+		yaw = lerp_angle(yaw, atan2(-f.x, -f.z), 1.0 - exp(-delta * 1.5))
 	var pivot := target.global_position + Vector3.UP * (1.05 if target.crouching else 1.55)
 	global_position = global_position.lerp(pivot, 1.0 - exp(-delta * 16.0))
 	rotation = Vector3(pitch, yaw, 0.0)

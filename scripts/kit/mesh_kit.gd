@@ -105,7 +105,7 @@ static func ellipsoid_mesh(radii: Vector3, subdiv := 2) -> ArrayMesh:
 
 ## Chiselled rock: noise-displaced icosphere with random planar cuts.
 ## Radius is about 1; scale the instance for size.
-static func rock_mesh(rock_seed: int, subdiv := 3, rough := 0.28, squash := Vector3(1, 0.72, 1), cuts := 7) -> ArrayMesh:
+static func rock_mesh(rock_seed: int, subdiv := 3, rough := 0.28, squash := Vector3(1, 0.72, 1), cuts := 13, flat := true) -> ArrayMesh:
 	var ico := _ico(subdiv)
 	var src: PackedVector3Array = ico[0]
 	var rng := RandomNumberGenerator.new()
@@ -117,7 +117,7 @@ static func rock_mesh(rock_seed: int, subdiv := 3, rough := 0.28, squash := Vect
 	var planes: Array = []
 	for _i in cuts:
 		var n := Vector3(rng.randf_range(-1, 1), rng.randf_range(-0.6, 1), rng.randf_range(-1, 1)).normalized()
-		planes.append([n, rng.randf_range(0.55, 0.9)])
+		planes.append([n, rng.randf_range(0.46, 0.86)])
 	var verts := PackedVector3Array()
 	verts.resize(src.size())
 	for i in src.size():
@@ -130,7 +130,50 @@ static func rock_mesh(rock_seed: int, subdiv := 3, rough := 0.28, squash := Vect
 		if p.y < -0.55:
 			p.y = -0.55
 		verts[i] = p * squash
-	return mesh_from(verts, ico[1])
+	return mesh_from(verts, ico[1], PackedVector2Array(), flat)
+
+
+## Layered rock stack / sea stack / butte: a faceted column with stepped strata
+## ledges and vertical flutes. Base at y = 0, flat top at y = height.
+static func strata_mesh(stack_seed: int, height: float, radius: float, top_ratio := 0.7, segs := 26, band := 1.7) -> ArrayMesh:
+	var noise := FastNoiseLite.new()
+	noise.seed = stack_seed
+	noise.frequency = 1.0
+	noise.fractal_octaves = 2
+	var rng := RandomNumberGenerator.new()
+	rng.seed = stack_seed
+	var ledges: Array = []
+	for _i in 64:
+		ledges.append(rng.randf_range(-0.13, 0.13))
+	var rings := maxi(4, int(height / 1.25))
+	var verts := PackedVector3Array()
+	var idx := PackedInt32Array()
+	for j in rings + 1:
+		var y := height * j / float(rings)
+		var t := y / height
+		var prof := lerpf(1.0, top_ratio, pow(t, 1.3)) * (1.0 + 0.16 * noise.get_noise_2d(y * 0.33, 71.0))
+		prof *= 1.0 + 0.55 * pow(1.0 - t, 6.0)
+		var ledge: float = ledges[int(y / band) % ledges.size()]
+		for i in segs:
+			var a := TAU * i / float(segs)
+			var nx := cos(a)
+			var nz := sin(a)
+			var flute := noise.get_noise_3d(nx * 1.1, y * 0.07, nz * 1.1)
+			var grit := noise.get_noise_3d(nx * 3.4, y * 0.42, nz * 3.4)
+			var r := radius * prof * (1.0 + ledge + flute * 0.42 + grit * 0.1)
+			verts.append(Vector3(nx * r, y, nz * r))
+	for j in rings:
+		for i in segs:
+			var a := j * segs + i
+			var b := j * segs + (i + 1) % segs
+			var c := (j + 1) * segs + (i + 1) % segs
+			var d := (j + 1) * segs + i
+			idx.append_array([a, c, b, a, d, c])
+	var top := verts.size()
+	verts.append(Vector3(0, height, 0))
+	for i in segs:
+		idx.append_array([top, rings * segs + (i + 1) % segs, rings * segs + i])
+	return mesh_from(verts, idx, PackedVector2Array(), true)
 
 
 ## Tube swept along `points` with per-point radii. `radii` entries may be float
@@ -184,6 +227,15 @@ static func loft_mesh(points: PackedVector3Array, radii: Array, sides := 10, up_
 		var e := (n - 1) * ring + j
 		idx.append_array([c1, e, e + 1])
 	return mesh_from(verts, idx, uvs)
+
+
+## Merges several meshes into one (one draw call). parts: Array of [Mesh, Transform3D].
+static func merge(parts: Array) -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for p in parts:
+		st.append_from(p[0], 0, p[1])
+	return st.commit()
 
 
 static func unit_box() -> BoxMesh:

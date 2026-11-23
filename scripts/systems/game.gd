@@ -80,6 +80,8 @@ func _ready() -> void:
 func era_scene(id: String) -> String:
 	if DEV_SCENES.has(id):
 		return DEV_SCENES[id]
+	if ResourceLoader.exists("res://scenes/dev/%s.tscn" % id):
+		return "res://scenes/dev/%s.tscn" % id
 	return "res://scenes/eras/%s/%s.tscn" % [id, id]
 
 

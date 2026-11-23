@@ -107,6 +107,9 @@ void fragment() {
 	alb *= mix(1.0, wet_dark, wet);
 	rough = mix(rough, wet_rough, wet * 0.9);
 	perturb *= mix(1.0, 0.45, wet);
+	// ground that is actually under the water is not a mirror: the surface above it is
+	float under = 1.0 - smoothstep(wet_level - 0.6, wet_level - 0.32, wpos.y);
+	rough = mix(rough, 0.9, under);
 
 	// runtime paint (burn / tracks / drift)
 	float p = texture(paint_tex, wpos.xz / terrain_size + 0.5).r;
@@ -123,5 +126,5 @@ void fragment() {
 	AO = arm.r;
 	AO_LIGHT_AFFECT = 0.3;
 	METALLIC = 0.0;
-	SPECULAR = 0.5;
+	SPECULAR = mix(0.5, 0.08, under);
 }

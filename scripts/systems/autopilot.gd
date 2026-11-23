@@ -13,6 +13,8 @@ class_name AutoPilot extends Node
 ##   AutoPilot.choose(index_or_callable)        pick a dialogue choice (auto-advances lines)
 ##   AutoPilot.drive(func(bot, delta) -> bool)  custom per-frame control; return true when done
 ##   AutoPilot.label("name")                    no-op marker shown in telemetry
+## Any step may carry {"skip_if": Callable}: the step is skipped when it returns true
+## at the moment the step starts (use it to keep plans correct when counts vary).
 
 signal finished
 signal failed(reason: String)
@@ -38,6 +40,8 @@ var _repath := 0.0
 var _use_fired := false
 var _use_conn: Variant = null
 var _dialogue_t := 0.0
+var _press_cd := 0.0
+var _checked_skip := -1
 
 
 # ------------------------------------------------------------ plan helpers
@@ -147,7 +151,13 @@ func _physics_process(delta: float) -> void:
 		# plan exhausted but era not complete: keep idling until the time limit trips
 		return
 	var step: Dictionary = plan[index]
+	if _checked_skip != index:
+		_checked_skip = index
+		if step.has("skip_if") and bool((step["skip_if"] as Callable).call()):
+			_next()
+			return
 	step_time += delta
+	_press_cd = maxf(0.0, _press_cd - delta)
 	# dialogue lines without choices are advanced automatically
 	if era.dialogue.active and step.op != "choose":
 		_dialogue_t += delta
@@ -271,7 +281,9 @@ func _do_use(step: Dictionary, delta: float) -> void:
 	var d := it.global_position.distance_to(player.global_position + Vector3.UP * 0.9)
 	if d < it.radius * 0.8 and it.enabled:
 		if player.focus == it:
-			player.input.press("interact")
+			if _press_cd <= 0.0:
+				_press_cd = 0.35
+				player.input.press("interact")
 		else:
 			# something else is nearer: nudge closer
 			_steer(it.global_position, step, delta)

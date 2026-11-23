@@ -19,6 +19,8 @@ uniform vec3 foam_color : source_color = vec3(0.75, 0.76, 0.72);
 uniform float roughness = 0.06;
 uniform float refraction = 0.025;
 uniform float murk = 0.0;
+uniform vec2 disc_center = vec2(0.0);
+uniform float disc_radius = 0.0;   // > 0: only draw inside this radius (tide pools)
 
 varying vec3 wpos;
 
@@ -30,6 +32,9 @@ void vertex() {
 }
 
 void fragment() {
+	if (disc_radius > 0.0 && distance(wpos.xz, disc_center) > disc_radius) {
+		discard;
+	}
 	vec2 uv = wpos.xz * wave_scale;
 	vec3 n1 = texture(wave_n, uv + TIME * wave_speed * vec2(1.0, 0.35)).rgb;
 	vec3 n2 = texture(wave_n, uv * 2.3 - TIME * wave_speed * vec2(0.4, 1.1)).rgb;
@@ -54,12 +59,17 @@ void fragment() {
 	float fade = clamp(1.0 - exp(-thick / max(clarity, 0.01)), 0.0, 1.0);
 	fade = max(fade, murk * clamp(thick * 4.0, 0.0, 1.0));
 	vec3 tint = mix(vec3(1.0), shallow * 2.2, clamp(fade * 1.6, 0.0, 1.0));
-	float foam = smoothstep(foam_width, 0.0, thick) * (0.55 + 0.45 * n2.r);
-	foam *= smoothstep(0.0, 0.04, thick);
+	float foam = (1.0 - smoothstep(0.0, foam_width, thick)) * (0.55 + 0.45 * n2.r);
+	foam *= smoothstep(0.0, 0.05, thick);
+	// energy conservation: what the surface reflects, it does not transmit
+	float ndv = clamp(dot(normalize(NORMAL), normalize(VIEW)), 0.0, 1.0);
+	float fres = 0.02 + 0.98 * pow(1.0 - ndv, 5.0);
 
 	ALBEDO = mix(deep * fade, foam_color, foam);
-	EMISSION = behind * tint * (1.0 - fade) * (1.0 - foam);
-	ROUGHNESS = mix(roughness, 0.6, foam);
+	EMISSION = behind * tint * (1.0 - fade) * (1.0 - foam) * (1.0 - fres);
+	ROUGHNESS = clamp(mix(roughness, 0.6, foam), 0.12, 1.0);
+	// soft shoreline instead of a hard polygon edge
+	ALPHA = smoothstep(0.0, 0.07, thick);
 	METALLIC = 0.0;
 	SPECULAR = 0.6;
 }

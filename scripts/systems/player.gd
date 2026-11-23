@@ -579,6 +579,17 @@ func teleport(pos: Vector3) -> void:
 	reset_physics_interpolation()
 
 
+## Shove the player (creature bumps, waves, explosions).
+func knockback(v: Vector3) -> void:
+	if not alive or state == State.MANTLE:
+		return
+	velocity = v
+	_air_peak_fall = 0.0
+	_set_crouch(false)
+	_coyote = 0.0
+	_set_state(State.AIR)
+
+
 func snapshot() -> Dictionary:
 	return {"pos": global_position, "vel": velocity, "facing": facing}
 

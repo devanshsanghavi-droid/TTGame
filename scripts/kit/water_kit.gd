@@ -3,7 +3,8 @@ class_name WaterKit extends RefCounted
 
 ## A flat water sheet centred at `pos` (its y is the surface height).
 ## opts: shallow, deep (Color), clarity (m), wave_scale, wave_speed, wave_strength,
-##       swell, foam_width, foam_color, roughness, murk (0..1), subdiv
+##       swell, foam_width, foam_color, roughness, murk (0..1), subdiv,
+##       disc_radius (draw only a circle of this radius: ponds, tide pools)
 static func plane(parent: Node, pos: Vector3, size: Vector2, opts: Dictionary = {}) -> MeshInstance3D:
 	var pm := PlaneMesh.new()
 	pm.size = size
@@ -20,6 +21,9 @@ static func plane(parent: Node, pos: Vector3, size: Vector2, opts: Dictionary = 
 		if opts.has(k):
 			var c: Color = opts[k]
 			mat.set_shader_parameter(k, Vector3(c.r, c.g, c.b))
+	if opts.has("disc_radius"):
+		mat.set_shader_parameter("disc_radius", opts.disc_radius)
+		mat.set_shader_parameter("disc_center", Vector2(pos.x, pos.z))
 	var m := MeshInstance3D.new()
 	m.mesh = pm
 	m.material_override = mat
