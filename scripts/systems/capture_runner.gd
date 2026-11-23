@@ -98,6 +98,8 @@ func _run() -> void:
 	era.player.invulnerable = true
 	era.chrono.glitches_enabled = false
 	era.chrono.end_all_glitches()
+	# shots pose the world themselves; scripted events must not undo the pose
+	era.director.enabled = false
 	era.hud.set_ui_visible(false)
 	era.hud.fade_to(0.0, 100.0)
 	cam = Camera3D.new()

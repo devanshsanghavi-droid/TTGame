@@ -11,3 +11,4 @@ assets/fonts/
 # Raw capture frames are large; contact sheets are kept
 captures/*/
 captures/*.wav
+captures/perf.log

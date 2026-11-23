@@ -29,7 +29,7 @@ elif platform.system() == "Darwin" and not a.foreground:
         cmd = ["open", "-g", "-n", "-W", "-a", exe.split("/Contents/MacOS/")[0], "--stdout", log, "--stderr", log,
                "--args"] + args + ["--bg=1"]
 with open(log, "a") as f:
-    subprocess.run(cmd, stdout=f, stderr=subprocess.STDOUT, timeout=3600)
+    subprocess.run(cmd, stdout=f, stderr=subprocess.STDOUT, timeout=900)
 res = json.load(open(os.path.join(ROOT, "captures", "perf.json")))
 print("%-14s %8s %8s %8s %10s %11s  %s" % ("era", "avg ms", "p99 ms", "fps", "draw calls", "primitives", "3D res"))
 for era, r in res.items():
