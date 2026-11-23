@@ -10,6 +10,7 @@ var results := {}
 
 
 func _ready() -> void:
+	get_window().unfocusable = true
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	Engine.max_fps = 0
 	_run.call_deferred()
@@ -40,7 +41,7 @@ func _measure(id: String) -> void:
 	get_tree().root.add_child(era)
 	await get_tree().process_frame
 	var vp := get_viewport()
-	var win := vp.size
+	var win: Vector2i = get_window().size
 	# internal 3D resolution of 1080 lines regardless of the window we were given
 	vp.scaling_3d_scale = clampf(1080.0 / float(win.y), 0.25, 2.0)
 	var res_txt := "%dx%d" % [int(win.x * vp.scaling_3d_scale), int(win.y * vp.scaling_3d_scale)]

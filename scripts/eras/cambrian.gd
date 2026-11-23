@@ -272,9 +272,9 @@ func _build_rocks() -> void:
 				return 0.0
 		return 1.0
 	Scatter.rocks(self, {"count": 420, "seed": 3, "terrain": terrain, "rect": Rect2(-150, -68, 300, 205), "scale": Vector2(0.1, 0.45),
-		"material": dark, "sink": 0.3, "align": 0.6, "accept": on_flats, "visibility_end": 110.0, "subdiv": 2, "shadows": false})
+		"material": dark, "sink": 0.3, "align": 0.6, "accept": on_flats, "visibility_end": 90.0, "subdiv": 1, "shadows": false})
 	Scatter.rocks(self, {"count": 70, "seed": 9, "terrain": terrain, "rect": Rect2(-150, -60, 300, 195), "scale": Vector2(0.6, 1.7),
-		"material": dark, "sink": 0.35, "align": 0.4, "accept": on_flats, "collide": true, "visibility_end": 240.0})
+		"material": dark, "sink": 0.35, "align": 0.4, "accept": on_flats, "collide": true, "visibility_end": 240.0, "subdiv": 2})
 	Scatter.rocks(self, {"count": 34, "seed": 14, "terrain": terrain, "rect": Rect2(-150, 118, 300, 60), "scale": Vector2(1.6, 4.6),
 		"material": pale, "sink": 0.4, "collide": true, "stretch_y": Vector2(0.8, 1.5)})
 	# big slabs marking the causeway and the ridge crossing

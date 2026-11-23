@@ -70,7 +70,7 @@ add `--foreground` to watch it.
 ## Performance
 
 ```bash
-godot --path . -- --perf=all           # frame time, FPS, draw calls per era -> captures/perf.json
+python3 tools/perf.py all              # frame time, FPS, draw calls per era -> captures/perf.json
 ```
 
 ## Project layout
